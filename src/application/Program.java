@@ -22,4 +22,9 @@ void main(){
     for (Seller seller : seller3) {
         IO.println(seller);
     }
+    IO.println();
+    IO.println("===== Teste 4: seller findByDepartment =====");
+    Seller  seller4 = new Seller(null, "Lucas", "lucas@gmail.com", new Date(), 1500.0,dep1);
+    sellerDao.insert(seller4);
+    IO.println("Inserted seller successfully! Seller id = " + seller4.getId());
 }
