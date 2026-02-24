@@ -6,10 +6,7 @@ import model.dao.SellerDao;
 import model.entities.Department;
 import model.entities.Seller;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -68,7 +65,36 @@ public class SellerDaoJDBC implements SellerDao {
 
     @Override
     public List<Seller> findAll() {
-        return List.of();
+        Statement statement = null;
+        ResultSet resultSet = null;
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(
+                    "select seller.* , department.name as DepName "
+                            + "from seller inner join department "
+                            + "on seller.DepartmentId = department.Id "
+                            + "ORDER BY Name");
+            List<Seller> sellers = new ArrayList<>();
+            Map<Integer, Department> departments = new HashMap<>();
+            while (resultSet.next()) {
+                // Teste para verificar se o department ja foi instanciado no Map de departamentos
+                Department dep = departments.get(resultSet.getInt("DepartmentId"));
+                if (dep == null) {
+                    dep = instantiateDepartment(resultSet);
+                    departments.put(resultSet.getInt("DepartmentId"), dep);
+                }
+                Seller seller = instantiateSeller(resultSet, dep);
+                sellers.add(seller);
+            }
+            return sellers;
+        }
+        catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }
+        finally {
+            DB.closeStatement(statement);
+            DB.closeResultSet(resultSet);
+        }
     }
 
     @Override
@@ -93,7 +119,7 @@ public class SellerDaoJDBC implements SellerDao {
                     dep = instantiateDepartment(resultSet);
                     departments.put(resultSet.getInt("DepartmentId"), dep);
                 }
-                Seller seller = instantiateSeller(resultSet, department);
+                Seller seller = instantiateSeller(resultSet, dep);
                 sellers.add(seller);
             }
             return sellers;
