@@ -33,4 +33,8 @@ void main(){
     seller5.setName("Jorge Blue");
     sellerDao.update(seller5);
     IO.println(seller5);
+    IO.println();
+    IO.println("===== Teste 6: seller deleteById =====");
+    sellerDao.deleteById(9);
+    IO.println("Deleted seller successfully!");
 }

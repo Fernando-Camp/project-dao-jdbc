@@ -60,7 +60,7 @@ public class SellerDaoJDBC implements SellerDao {
             preparedStatement = connection.prepareStatement(
                     "update seller "
                     + "Set name = ?, email = ?, birthdate = ?, baseSalary = ?, departmentId = ? "
-                    + "where id = ?", PreparedStatement.RETURN_GENERATED_KEYS);
+                    + "where id = ?");
             preparedStatement.setString(1, seller.getName());
             preparedStatement.setString(2, seller.getEmail());
             preparedStatement.setDate(3, new java.sql.Date(seller.getBirthDate().getTime()));
@@ -79,7 +79,19 @@ public class SellerDaoJDBC implements SellerDao {
 
     @Override
     public void deleteById(Integer id) {
-
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(
+                    "delete from seller where id = ?");
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        }
+        catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }
+        finally {
+            DB.closePreparedStatement(preparedStatement);
+        }
     }
 
     @Override
