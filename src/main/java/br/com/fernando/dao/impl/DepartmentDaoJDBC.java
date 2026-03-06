@@ -1,6 +1,6 @@
 package model.dao.impl;
 
-import db.DB;
+import br.com.fernando.db.DB;
 import db.DbException;
 import model.dao.DepartmentDao;
 import model.entities.Department;

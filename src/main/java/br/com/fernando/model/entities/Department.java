@@ -1,4 +1,4 @@
-package model.entities;
+package br.com.fernando.model.entities;
 
 import java.io.Serializable;
 import java.util.Objects;
