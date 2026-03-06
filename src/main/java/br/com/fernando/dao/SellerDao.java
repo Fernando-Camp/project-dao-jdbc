@@ -1,7 +1,7 @@
-package model.dao;
+package br.com.fernando.dao;
 
-import model.entities.Department;
-import model.entities.Seller;
+import br.com.fernando.model.entities.Department;
+import br.com.fernando.model.entities.Seller;
 
 import java.util.List;
 

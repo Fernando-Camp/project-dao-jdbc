@@ -1,4 +1,4 @@
-package model.entities;
+package br.com.fernando.model.entities;
 
 import java.util.Date;
 import java.util.Objects;

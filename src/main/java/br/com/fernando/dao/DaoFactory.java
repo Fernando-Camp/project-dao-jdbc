@@ -1,8 +1,8 @@
-package model.dao;
+package br.com.fernando.dao;
 
+import br.com.fernando.dao.impl.DepartmentDaoJDBC;
+import br.com.fernando.dao.impl.SellerDaoJDBC;
 import br.com.fernando.db.DB;
-import model.dao.impl.DepartmentDaoJDBC;
-import model.dao.impl.SellerDaoJDBC;
 
 public class DaoFactory {
 

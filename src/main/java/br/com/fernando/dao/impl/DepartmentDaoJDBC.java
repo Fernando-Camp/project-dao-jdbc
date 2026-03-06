@@ -1,9 +1,9 @@
-package model.dao.impl;
+package br.com.fernando.dao.impl;
 
+import br.com.fernando.dao.DepartmentDao;
 import br.com.fernando.db.DB;
-import db.DbException;
-import model.dao.DepartmentDao;
-import model.entities.Department;
+import br.com.fernando.db.DbException;
+import br.com.fernando.model.entities.Department;
 
 import java.sql.*;
 import java.util.ArrayList;
